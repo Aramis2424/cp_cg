@@ -178,28 +178,21 @@ void Scene::draw_background()
     QRgb rgbBgCol = bgCol.qrgbColor();
     this->clear();
     img->fill(rgbBgCol);
-//    for (int y = 0; y < _height; y++)
-//        for (int x = 0; x < _width; x++)
-//            img->setPixel(x, y, rgbBgCol);
-
-//    Color bgCol = BACKGROUND_COLOR;
-//    QBrush background_color(bgCol.qtcolor());
-//    QPen outlinePen(bgCol.qtcolor());
-    //    this->addRect(0, 0, _width, _height, outlinePen, background_color);
 }
 
 void Scene::draw_pendulum_thread()
 {
     QPainter painter;
     painter.begin(img);
-    painter.setPen(QPen(Qt::black, 2));
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
     double centerX, centerY, centerZ;
     sphere->get_center(centerX, centerY, centerZ);
     double x = centerX * -1/centerZ;
-    double y = (centerY - 2) * -1/centerZ;
+    double y = (centerY - sphere->get_radius()) * -1/centerZ;
 
-    painter.drawLine(xWorldCoords(0), yWorldCoords(1),
+    painter.drawLine(xWorldCoords(0), yWorldCoords(7),
                      xWorldCoords(x), yWorldCoords(y));
 }
 
