@@ -33,17 +33,14 @@ void Sphere::moving(long long time_sim)
 
     // new coords
 
-    cur_x = xt(time_sim, 15);
-    cur_z = yt(time_sim, 15) - 20;
-    //std::cout << xt(time_sim, 10) << std::endl;
-    //std::cout << 9/20 * 10 * cos(22/99 * time_sim) + 11/20 * 10 * cos(18/99 * time_sim) << std::endl;
-    //std::cout << cos(18/99 * time_sim) << std::endl;
-    //std::cout << "=======" << std::endl;
-//    double dx = 0.2;
-//    if (time_sim < 50)
-//        cur_x -= dx;
-//    else
-//        cur_x += dx;
+    //cur_x = 5e-1* xt(time_sim, 15); // TODO: добавить коэф. k, чтобы не было рывков
+    //cur_z = 5e-1* yt(time_sim, 15) - 20; // TODO: include constants
+
+    double dx = 0.2;
+    if (time_sim < 50)
+        cur_x -= dx;
+    else
+        cur_x += dx;
 
     //cur_z -= 0.5;
     //cur_x = 1;
