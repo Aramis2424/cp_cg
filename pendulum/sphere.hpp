@@ -17,6 +17,15 @@ private:
     int radius;
     Material* material;
     Vector* center;
+private:
+    double xt(long long t, double x0)
+    {
+        return 9/20 * x0 * cos(22/99 * t) + 11/20 * x0 * cos(18/99 * t);
+    }
+    double yt(long long t, double x0)
+    {
+        return -9/20 * x0 * sin(22/99 * t) + 11/20 * x0 * sin(18/99 * t);
+    }
 public:
     Sphere()
     {
