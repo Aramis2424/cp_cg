@@ -31,6 +31,8 @@ private:
     QGraphicsLineItem* pixelLine;
     QImage* img;
 
+    long long time_simulation;
+
 private:
     double xSceneCoords(int x)
     {
@@ -75,6 +77,7 @@ public:
         lights.push_back(*light_1);
         lights.push_back(*light_2);
         img = new QImage(_width, _height, QImage::Format_RGB32);
+        time_simulation = 0;
     }
     ~Scene()
     {

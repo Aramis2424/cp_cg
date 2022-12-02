@@ -25,7 +25,7 @@ void Sphere::get_material(Color &difCol, Vector &alb, double &spec) const
     spec = material->get_spec_exp();
 }
 
-void Sphere::moving()
+void Sphere::moving(long long time_sim)
 {
     // get current coords
     double cur_x, cur_y, cur_z;
@@ -33,7 +33,10 @@ void Sphere::moving()
 
     // new coords
     double dx = 0.2;
-    cur_x -= dx;
+    if (time_sim < 50)
+        cur_x -= dx;
+    else
+        cur_x += dx;
 
     //cur_z -= 0.5;
     //cur_x = 1;

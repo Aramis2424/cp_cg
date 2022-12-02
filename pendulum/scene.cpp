@@ -144,10 +144,10 @@ bool Scene::ray_tracing(const Vector* orig, const Vector dir,
 
 void Scene::render()
 {   
-
     Vector dir;
     Color color = BACKGROUND_COLOR;
-    sphere->moving();
+    sphere->moving(time_simulation);
+    time_simulation++;
 
     this->draw_background();
     this->draw_pendulum_thread(); //TODO: как сгладить

@@ -45,7 +45,7 @@ public:
     Material *get_material() const;
     void get_material(Color &difCol, Vector &alb, double &spec) const;
 
-    void moving();
+    void moving(long long time_sim);
 
     bool ray_intersect(const Vector &orig, const Vector &dir,
                        double &t0) const;
