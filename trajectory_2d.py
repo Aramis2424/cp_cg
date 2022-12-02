@@ -26,6 +26,7 @@ def add_pixel(x, y):
 pixels = []
 
 def xt(t, x0):
+    print(9/20 * x0 * cos(22/99 * t))
     return 9/20 * x0 * cos(22/99 * t) + 11/20 * x0 * cos(18/99 * t)
 def yt(t, x0):
     return -9/20 * x0 * sin(22/99 * t) + 11/20 * x0 * sin(18/99 * t)

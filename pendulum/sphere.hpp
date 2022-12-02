@@ -20,11 +20,11 @@ private:
 private:
     double xt(long long t, double x0)
     {
-        return 9/20 * x0 * cos(22/99 * t) + 11/20 * x0 * cos(18/99 * t);
+        return 9.0/20 * x0 * cos(22.0/99 * t) + 11.0/20 * x0 * cos(18.0/99 * t);
     }
     double yt(long long t, double x0)
     {
-        return -9/20 * x0 * sin(22/99 * t) + 11/20 * x0 * sin(18/99 * t);
+        return -9.0/20 * x0 * sin(22.0/99 * t) + 11.0/20 * x0 * sin(18.0/99 * t);
     }
 public:
     Sphere()
