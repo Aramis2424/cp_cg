@@ -25,7 +25,13 @@ def add_pixel(x, y):
     pygame.draw.line(screen, (255, 255, 255), (x,y), (x,y))
 pixels = []
 
+def xt(t, x0):
+    return 9/20 * x0 * cos(22/99 * t) + 11/20 * x0 * cos(18/99 * t)
+def yt(t, x0):
+    return -9/20 * x0 * sin(22/99 * t) + 11/20 * x0 * sin(18/99 * t)
+
 running = True
+stop = False
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -33,15 +39,28 @@ while running:
             pygame.display.quit()
             pygame.quit()
             sys.exit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT:
+                if not stop:
+                    stop = True
+                else:
+                    stop = False
+    if stop:
+        continue
     dt = clock.tick(24) / 1000.0
 #============================================================================
 
-    x = a * sin(t) + vx
-    y = b * cos(t) + vy
+##    x = a * sin(t) + vx
+##    y = b * cos(t) + vy
+##    a += 0.1
+##    b += 0.1
+    x = xt(t, vx) + vx
+    y = yt(t, vy) + vy
+
     t += 0.1
     t %= 500
-    a += 0.1
-    b += 0.1
+    if t == 0:
+        pixels = []
 
 
 #============================================================================
