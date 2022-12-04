@@ -150,7 +150,7 @@ void Scene::render()
     time_simulation++;
 
     this->draw_background();
-    this->draw_pendulum_thread(); //TODO: как сгладить
+    this->draw_pendulum_thread();
 
     #pragma omp parallel for num_threads(8) private(dir, color)
     for (int j = 0; j < _height; j++)
@@ -168,6 +168,7 @@ void Scene::render()
             draw_pix(i, j, color);
         }
 
+    this->draw_trajectory();
     this->addPixmap(QPixmap::fromImage(*img));
 
 }
@@ -194,6 +195,39 @@ void Scene::draw_pendulum_thread()
 
     painter.drawLine(xWorldCoords(0), yWorldCoords(7),
                      xWorldCoords(x), yWorldCoords(y));
+}
+
+void Scene::draw_trajectory()
+{
+
+    QPainter painter;
+    painter.begin(img);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+
+    double centerX, centerY, centerZ;
+    sphere->get_center(centerX, centerY, centerZ);
+    double x = centerX * -1/centerZ;
+    double y = (centerY - 2*sphere->get_radius() - 4) * -1/centerZ;
+    trajectory.push_back(std::pair<double, double>(x, y));
+
+    if (trajectory.size() > 1)
+        if (
+                (abs(x - trajectory[0].first) < 1e-5) &&
+                (abs(y - trajectory[0].second) < 1e-5)
+           )
+        {
+            trajectory.clear();
+            return;
+        }
+
+    for (unsigned long long i = 0; i < trajectory.size() - 1; i++)
+    {
+        std::pair<double, double> cur = trajectory[i];
+        std::pair<double, double> next = trajectory[i+1];
+        painter.drawLine(xWorldCoords(cur.first), yWorldCoords(cur.second),
+                         xWorldCoords(next.first), yWorldCoords(next.second));
+    }
 }
 
 } }

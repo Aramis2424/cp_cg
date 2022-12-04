@@ -1,4 +1,5 @@
 #include "sphere.hpp"
+#include "constants.hpp"
 
 namespace FP { namespace sphere {
 
@@ -32,15 +33,16 @@ void Sphere::moving(long long time_sim)
     get_center(cur_x, cur_y, cur_z);
 
     // new coords
+    double k = 8e-1;
+    int start_x = 15;
+    cur_x = k * xt(time_sim, start_x); // TODO: добавить коэф. k, чтобы не было рывков
+    cur_z = k * yt(time_sim, start_x) + sz0;
 
-    //cur_x = 5e-1* xt(time_sim, 15); // TODO: добавить коэф. k, чтобы не было рывков
-    //cur_z = 5e-1* yt(time_sim, 15) - 20; // TODO: include constants
-
-    double dx = 0.2;
-    if (time_sim < 50)
-        cur_x -= dx;
-    else
-        cur_x += dx;
+//    double dx = 0.2;
+//    if (time_sim < 50)
+//        cur_x -= dx;
+//    else
+//        cur_x += dx;
 
     //cur_z -= 0.5;
     //cur_x = 1;

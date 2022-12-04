@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 #include <QImage>
+#include <vector>
 #include "color.hpp"
 #include "vector.hpp"
 #include "sphere.hpp"
@@ -32,6 +33,7 @@ private:
     QImage* img;
 
     long long time_simulation;
+    std::vector<std::pair<double, double>> trajectory;
 
 private:
     double xSceneCoords(int x)
@@ -100,6 +102,7 @@ public:
     void render();
     void draw_background();
     void draw_pendulum_thread();
+    void draw_trajectory();
 };
 
 } }

@@ -8,6 +8,8 @@
 
 //Scene
 #define FPS24 1000/24
+#define FPS30 1000/30
+#define FPS60 1000/60
 const int WIDTH = 950;
 const int HEIGHT = 934;
 const FP::color::Color  BACKGROUND_COLOR(0.2, 0.7, 0.8);
@@ -15,7 +17,7 @@ const FP::color::Color  BACKGROUND_COLOR(0.2, 0.7, 0.8);
 // Sphere
 const double sx0 = 0;
 const double sy0 = 0;
-const double sz0 = -20;
+const double sz0 = -25;
 
 const int sr = 2;
 

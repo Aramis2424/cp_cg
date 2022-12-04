@@ -28,10 +28,10 @@ MainWindow::MainWindow(QWidget *parent)
     scene->setSceneRect(0, 0, 1, 1);
 
     //Time and FPS
-//    timer = new QTimer(this);
-//    connect(timer, SIGNAL(timeout()),
-//            this, SLOT(start_render()));
-//    timer->start(FPS24);
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()),
+            this, SLOT(start_render()));
+    timer->start(FPS60);
 }
 
 MainWindow::~MainWindow()
