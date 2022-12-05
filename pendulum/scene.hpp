@@ -32,7 +32,7 @@ private:
     QGraphicsLineItem* pixelLine;
     QImage* img;
 
-    long long time_simulation;
+    long double time_simulation;
     std::vector<std::pair<double, double>> trajectory;
 
 private:

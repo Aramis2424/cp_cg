@@ -145,7 +145,7 @@ void Scene::render()
     Vector dir;
     Color color = BACKGROUND_COLOR;
     sphere->moving(time_simulation);
-    time_simulation++;
+    time_simulation += 0.2;
 
     this->draw_background();
     this->draw_pendulum_thread();
@@ -222,6 +222,13 @@ void Scene::draw_trajectory()
     {
         std::pair<double, double> cur = trajectory[i];
         std::pair<double, double> next = trajectory[i+1];
+
+//        if (cur.first <= (centerX + sphere->get_radius())-1/centerZ &&
+//                cur.first >= (centerX - sphere->get_radius())*-1/centerZ &&
+//                cur.second <= (centerY + 0*sphere->get_radius())-1/centerZ &&
+//                cur.second >= (centerY - 2*sphere->get_radius())*-1/centerZ)
+//            continue;
+
         painter.drawLine(xWorldCoords(cur.first), yWorldCoords(cur.second),
                          xWorldCoords(next.first), yWorldCoords(next.second));
     }

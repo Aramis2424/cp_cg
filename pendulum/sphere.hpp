@@ -41,12 +41,12 @@ private:
         return -9.0/20 * x0 * sin(22.0/99 * t) + 11.0/20 * x0 * sin(18.0/99 * t);
     }
 
-    double x_new(long long t, double x0)
+    double x_new(long double t, double x0)
     {
         return x0*place.omega_minus/(2.0*place._omega_) * cos(place.omega_plus*t) +\
                x0*place.omega_plus/(2.0*place._omega_) * cos(place.omega_minus*t);
     }
-    double y_new(long long t, double x0)
+    double y_new(long double t, double x0)
     {
         return -x0*place.omega_minus/(2.0*place._omega_) * sin(place.omega_plus*t) +\
                x0*place.omega_plus/(2.0*place._omega_) * sin(place.omega_minus*t);
@@ -91,7 +91,7 @@ public:
     Material *get_material() const;
     void get_material(Color &difCol, Vector &alb, double &spec) const;
 
-    void moving(long long time_sim);
+    void moving(long double time_sim);
 
     bool ray_intersect(const Vector &orig, const Vector &dir,
                        double &t0) const;
