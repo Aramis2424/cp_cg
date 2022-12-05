@@ -5,6 +5,7 @@
 #include <iostream>
 #include "vector.hpp"
 #include "material.hpp"
+#include "placment.hpp"
 #include <QTimer>
 
 namespace FP { namespace sphere {
@@ -17,6 +18,19 @@ private:
     int radius;
     Material* material;
     Vector* center;
+    struct
+    {
+        //const double omega = 7.292e-5; // Стандарт
+        //const double omega = 0.01; // Ускорение Земли -- линии
+        const double omega = 0.03; // Ускорение Земли -- тр-ки
+        double omega_z;
+        double omega_0;
+        double gl;
+        double _omega_;
+        double omega_minus;
+        double omega_plus;
+        double phi;
+    }place;
 private:
     double xt(long long t, double x0)
     {
@@ -26,6 +40,18 @@ private:
     {
         return -9.0/20 * x0 * sin(22.0/99 * t) + 11.0/20 * x0 * sin(18.0/99 * t);
     }
+
+    double x_new(long long t, double x0)
+    {
+        return x0*place.omega_minus/(2.0*place._omega_) * cos(place.omega_plus*t) +\
+               x0*place.omega_plus/(2.0*place._omega_) * cos(place.omega_minus*t);
+    }
+    double y_new(long long t, double x0)
+    {
+        return -x0*place.omega_minus/(2.0*place._omega_) * sin(place.omega_plus*t) +\
+               x0*place.omega_plus/(2.0*place._omega_) * sin(place.omega_minus*t);
+    }
+
 public:
     Sphere()
     {
@@ -48,6 +74,17 @@ public:
 
     void set_center(double x, double y, double z);
     void get_center(double &x, double &y, double &z) const;
+
+    void set_place(int latitude)
+    {
+        place.phi = latitude;
+        place.omega_z = place.omega * sin(place.phi);
+        place.gl = 10.0 / 50.0;
+        place.omega_0 = sqrt(place.gl);
+        place._omega_ = sqrt(place.omega_0*place.omega_0 + place.omega_z*place.omega_z);
+        place.omega_minus = place._omega_ - place.omega_z;
+        place.omega_plus = place._omega_ + place.omega_z;
+    }
 
     int get_radius(void) { return radius; }
 

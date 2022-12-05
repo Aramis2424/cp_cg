@@ -15,9 +15,6 @@ void Scene::draw_pix(double x, double y, Color col)
     QRgb rgbCol = col.qrgbColor();
     int intX = round(x);
     int intY = round(y);
-//    QColor qcol = col.qtcolor();
-//    QPen color(qcol);
-//    pixelLine = this->addLine(x, y, x, y, color);
     img->setPixel(intX, intY, rgbCol);
 }
 
@@ -66,7 +63,8 @@ bool Scene::scene_intersect(const Vector* orig, const Vector dir,
             hit = pt;
             N = Vector(0,1,0);
             //std::cout << ((int(.5*hitX+1000) + int(.5*hitZ)) & 1) << " ";
-            diffuse_color = (int(0.5*ptX+1000) + int(0.5*ptZ)) & 1 ? Color(0.3, 0.3, 0.3) : Color(0.3, 0.21, 0.9);
+            diffuse_color = (int(0.5*ptX+1000) + int(0.5*ptZ)) & 1 ?
+                        Color(0.3, 0.3, 0.3) : Color(0.3, 0.21, 0.9);
             //diffuse_color = diffuse_color * 0.3;
             material = Material(diffuse_color, albedo, spec);
             //material = Material(diffuse_color, Vector(1,0,0), 0);
@@ -199,7 +197,6 @@ void Scene::draw_pendulum_thread()
 
 void Scene::draw_trajectory()
 {
-
     QPainter painter;
     painter.begin(img);
     painter.setRenderHint(QPainter::Antialiasing, true);

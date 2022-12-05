@@ -6,6 +6,7 @@
 #include "sphere.hpp"
 
 #include "color.hpp"
+#include "placment.hpp"
 
 #include "vector.hpp"
 #include <iostream>
@@ -27,11 +28,13 @@ MainWindow::MainWindow(QWidget *parent)
                                      QPainter::SmoothPixmapTransform);
     scene->setSceneRect(0, 0, 1, 1);
 
+    ui->radio_north->setChecked(true);
+
     //Time and FPS
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()),
-            this, SLOT(start_render()));
-    timer->start(FPS60);
+//    timer = new QTimer(this);
+//    connect(timer, SIGNAL(timeout()),
+//            this, SLOT(start_render()));
+//    timer->start(FPS60);
 }
 
 MainWindow::~MainWindow()
@@ -47,6 +50,15 @@ void MainWindow::start_render()
 
 void MainWindow::on_start_btn_clicked()
 {
+    if (ui->radio_north->isChecked())
+        scene->set_place(90);
+    else if (ui->radio_south->isChecked())
+        scene->set_place(-90);
+    else if (ui->radio_equator->isChecked())
+        scene->set_place(0);
+    else if (ui->radio_Moscow->isChecked())
+        scene->set_place(56);
+
     mode = on;
 
     scene->render();

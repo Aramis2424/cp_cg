@@ -18,6 +18,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     material.cpp \
+    placment.cpp \
     scene.cpp \
     sphere.cpp \
     vector.cpp
@@ -29,6 +30,7 @@ HEADERS += \
     light.hpp \
     mainwindow.h \
     material.hpp \
+    placment.hpp \
     scene.hpp \
     sphere.hpp \
     vector.hpp

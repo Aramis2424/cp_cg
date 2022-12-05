@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
 
     <<<<===--- Troubles ---===>>>>
 Нет тени от второго источника
+за шаром видны линии траектории
 
     <>=-<>=-:; Extra_material ;:-=<>-=<>
 Sphere sphere(10, _width/2, _height/2, 0); // так было изначально

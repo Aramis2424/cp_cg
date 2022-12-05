@@ -6,6 +6,9 @@
 #include "material.hpp"
 #include "color.hpp"
 
+// Earth
+const double omega = 7.292e-5;
+
 //Scene
 #define FPS24 1000/24
 #define FPS30 1000/30
@@ -17,7 +20,7 @@ const FP::color::Color  BACKGROUND_COLOR(0.2, 0.7, 0.8);
 // Sphere
 const double sx0 = 0;
 const double sy0 = 0;
-const double sz0 = -25;
+const double sz0 = -26;
 
 const int sr = 2;
 
