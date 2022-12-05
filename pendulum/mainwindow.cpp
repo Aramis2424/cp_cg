@@ -31,10 +31,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->radio_north->setChecked(true);
 
     //Time and FPS
-//    timer = new QTimer(this);
-//    connect(timer, SIGNAL(timeout()),
-//            this, SLOT(start_render()));
-//    timer->start(FPS60);
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()),
+            this, SLOT(start_render()));
+    timer->start(FPS60);
 }
 
 MainWindow::~MainWindow()
@@ -51,19 +51,26 @@ void MainWindow::start_render()
 void MainWindow::on_start_btn_clicked() // TODO: заблокировать кнопку послу запуска
 { // TODO: добавить кнопку reset, которая обнуляет все переменные и разблокирует
         // кнопку старт
+
+    // Траектория
+    if (ui->isTrajectory->isChecked())
+        scene->set_acceleration(true);
+    else
+        scene->set_acceleration(false);
+
+    // Скорость Земли
+    if (ui->isAcceleration->isChecked())
+        scene->set_acceleration(true);
+    else
+        scene->set_acceleration(false);
+
+    // Основные параметры
     if (ui->radio_north->isChecked())
         scene->set_place(90);
     else if (ui->radio_south->isChecked())
         scene->set_place(-90);
     else if (ui->radio_equator->isChecked())
         scene->set_place(0);
-    else if (ui->radio_Moscow->isChecked())
-        scene->set_place(56);
-
-//    if (ui->isAcceleration->???)
-//        scene->set_acceleration(true);
-//    else
-//        scene->set_acceleration(false);
 
     mode = on;
 

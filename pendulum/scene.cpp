@@ -166,6 +166,7 @@ void Scene::render()
             draw_pix(i, j, color);
         }
 
+    //if (isTrajectory)
     this->draw_trajectory();
     this->addPixmap(QPixmap::fromImage(*img));
 }

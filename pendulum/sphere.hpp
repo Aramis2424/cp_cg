@@ -22,7 +22,8 @@ private:
     {
         //const double omega = 7.292e-5; // Стандарт
         //const double omega = 0.01; // Ускорение Земли -- линии
-        const double omega = 0.03; // Ускорение Земли -- тр-ки
+        //const double omega = 0.03; // Ускорение Земли -- тр-ки
+        double omega;
         double omega_z;
         double omega_0;
         double gl;
@@ -87,7 +88,13 @@ public:
         place.omega_plus = place._omega_ + place.omega_z;
     }
     void set_acceleration(bool a)
-    {  acceleration = a; }
+    {
+        acceleration = a;
+        if (acceleration)
+            place.omega = 0.01;
+        else
+            place.omega = 7.292e-5;
+    }
 
     int get_radius(void) { return radius; }
 
