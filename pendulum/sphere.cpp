@@ -36,6 +36,7 @@ void Sphere::moving(long double time_sim)
     // new coords
     double k = 8e-1;
     int start_x = 15;
+    //if (acceleration)
     cur_x = k * x_new(time_sim, start_x); // TODO: добавить коэф. k, чтобы не было рывков
     cur_z = k * y_new(time_sim, start_x) + sz0;
 

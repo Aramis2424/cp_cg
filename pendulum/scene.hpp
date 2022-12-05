@@ -101,6 +101,8 @@ public:
     void draw_pix(double x, double y, Color col);
     void set_place(int latitude)
     { sphere->set_place(latitude); }
+    void set_acceleration(bool a)
+    {  sphere->set_acceleration(a); }
     void render();
     void draw_background();
     void draw_pendulum_thread();

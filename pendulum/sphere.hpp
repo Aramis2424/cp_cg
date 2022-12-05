@@ -31,6 +31,7 @@ private:
         double omega_plus;
         double phi;
     }place;
+    bool acceleration;
 private:
     double xt(long long t, double x0)
     {
@@ -85,6 +86,8 @@ public:
         place.omega_minus = place._omega_ - place.omega_z;
         place.omega_plus = place._omega_ + place.omega_z;
     }
+    void set_acceleration(bool a)
+    {  acceleration = a; }
 
     int get_radius(void) { return radius; }
 

@@ -48,8 +48,9 @@ void MainWindow::start_render()
         scene->render();
 }
 
-void MainWindow::on_start_btn_clicked()
-{
+void MainWindow::on_start_btn_clicked() // TODO: заблокировать кнопку послу запуска
+{ // TODO: добавить кнопку reset, которая обнуляет все переменные и разблокирует
+        // кнопку старт
     if (ui->radio_north->isChecked())
         scene->set_place(90);
     else if (ui->radio_south->isChecked())
@@ -58,6 +59,11 @@ void MainWindow::on_start_btn_clicked()
         scene->set_place(0);
     else if (ui->radio_Moscow->isChecked())
         scene->set_place(56);
+
+//    if (ui->isAcceleration->???)
+//        scene->set_acceleration(true);
+//    else
+//        scene->set_acceleration(false);
 
     mode = on;
 

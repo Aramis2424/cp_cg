@@ -168,7 +168,6 @@ void Scene::render()
 
     this->draw_trajectory();
     this->addPixmap(QPixmap::fromImage(*img));
-
 }
 
 void Scene::draw_background()
