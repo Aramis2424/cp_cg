@@ -93,7 +93,7 @@ public:
 
     bool ray_tracing(const Vector* orig, const Vector dir,
                      const Sphere* sphere, Color* const col,
-                     const std::vector<Light> lights, size_t depth);
+                     const std::vector<Light> lights, size_t depth, const int type);
 
     bool scene_intersect(const Vector *orig, const Vector dir,
                          const Sphere *sphere,
@@ -124,6 +124,19 @@ public:
     void draw_pendulum_thread();
     void add_trajectory();
     void draw_trajectory();
+
+
+
+
+
+
+
+
+
+
+    bool plane_intersect(const Vector* orig, const Vector dir,
+                                const Sphere* sphere, Vector &hit,
+                                Vector &N, Material &material);
 };
 
 } }

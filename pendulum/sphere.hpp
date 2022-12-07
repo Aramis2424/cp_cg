@@ -91,7 +91,7 @@ public:
     {
         acceleration = a;
         if (acceleration)
-            place.omega = 0.01;
+            place.omega = 0.04;
         else
             place.omega = 7.292e-5;
     }
