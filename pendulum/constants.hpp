@@ -13,6 +13,7 @@ const double omega = 7.292e-5;
 #define FPS24 1000/24
 #define FPS30 1000/30
 #define FPS60 1000/60
+
 const int WIDTH = 950;
 const int HEIGHT = 934;
 const FP::color::Color  BACKGROUND_COLOR(0.2, 0.7, 0.8);
@@ -42,15 +43,15 @@ const double FOV = M_PI / 2.0;
 
 //Light _1_
 const double lx1 = 10;
-const double ly1 = 15;
-const double lz1 = 0;
+const double ly1 = 25;
+const double lz1 = -5;
 
 const double lintens1 = 1.5;
 
 //Light _2_
-const double lx2 = -30;
-const double ly2 = -5;
-const double lz2 = 40;
+const double lx2 = -10;
+const double ly2 = 25;
+const double lz2 = -5;
 
 const double lintens2 = 0.7;
 
