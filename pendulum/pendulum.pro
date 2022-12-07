@@ -12,16 +12,11 @@ LIBS += -fopenmp
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    camera.cpp \
     color.cpp \
-    light.cpp \
     main.cpp \
     mainwindow.cpp \
-    material.cpp \
-    placment.cpp \
     scene.cpp \
-    sphere.cpp \
-    vector.cpp
+    sphere.cpp
 
 HEADERS += \
     camera.hpp \
@@ -30,7 +25,6 @@ HEADERS += \
     light.hpp \
     mainwindow.h \
     material.hpp \
-    placment.hpp \
     scene.hpp \
     sphere.hpp \
     vector.hpp

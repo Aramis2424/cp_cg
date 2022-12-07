@@ -6,7 +6,6 @@
 #include "sphere.hpp"
 
 #include "color.hpp"
-#include "placment.hpp"
 
 #include "vector.hpp"
 #include <iostream>

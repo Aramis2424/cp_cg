@@ -30,7 +30,6 @@ public:
         this->x = x;
         this->y = y;
         this->z = z;
-        //return Vector(x, y, z);
     }
 
     void get_vec(double &x, double &y, double &z) const

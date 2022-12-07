@@ -8,7 +8,6 @@
 
 #include "scene.hpp"
 #include "sphere.hpp"
-#include "placment.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,7 +36,6 @@ private:
     QGraphicsLineItem *line;
 
     state_t mode;
-    Placment p;
 
 private:
     Ui::MainWindow *ui;

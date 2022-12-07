@@ -5,7 +5,6 @@
 #include <iostream>
 #include "vector.hpp"
 #include "material.hpp"
-#include "placment.hpp"
 #include <QTimer>
 
 namespace FP { namespace sphere {

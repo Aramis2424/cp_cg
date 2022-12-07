@@ -10,33 +10,26 @@
 
 namespace FP { namespace scene {
 
-void Scene::draw_pix(double x, double y, Color col)
-{
-    QRgb rgbCol = col.qrgbColor();
-    int intX = round(x);
-    int intY = round(y);
-    img->setPixel(intX, intY, rgbCol);
-}
-
 bool Scene::scene_intersect(const Vector* orig, const Vector dir,
                             const Sphere* sphere, Vector &hit,
                             Vector &N, Material &material)
 {
     double spheres_dist = std::numeric_limits<double>::max();
 
-        double dist_i;
-        if (sphere->ray_intersect(*orig, dir, dist_i) && dist_i < spheres_dist) {
-            spheres_dist = dist_i;
-            hit = *orig + dir*dist_i;
+    double dist_i;
+    if (sphere->ray_intersect(*orig, dir, dist_i) && dist_i < spheres_dist)
+    {
+        spheres_dist = dist_i;
+        hit = *orig + dir*dist_i;
 
-            double x, y, z;
-            sphere->get_center(x, y, z);
-            Vector tmp(x, y, z);
+        double x, y, z;
+        sphere->get_center(x, y, z);
+        Vector tmp(x, y, z);
 
-            N = (hit - tmp).normalize();
+        N = (hit - tmp).normalize();
 
-            material = *sphere->get_material();
-        }
+        material = *sphere->get_material();
+    }
 
     //return spheres_dist < 1000;
 
@@ -64,8 +57,9 @@ bool Scene::scene_intersect(const Vector* orig, const Vector dir,
             N = Vector(0,1,0);
             //std::cout << ((int(.5*hitX+1000) + int(.5*hitZ)) & 1) << " ";
             diffuse_color = (int(0.5*ptX+1000) + int(0.5*ptZ)) & 1 ?
-                        Color(0.4, 0.47, 0.2) : Color(0.3, 0.21, 0.9);
-                        //Color(0, 0, 0) : Color(1, 1, 1);
+                        Color(0.3, 0.3, 0.3) : Color(0.3, 0.21, 0.9);
+                        //Color(0.4, 0.47, 0.2) : Color(0.3, 0.21, 0.9);  // зел
+                        //Color(0, 0, 0) : Color(1, 1, 1);  //   ч\б
             //diffuse_color = diffuse_color * 0.3;
             material = Material(diffuse_color, albedo, spec);
             //material = Material(diffuse_color, Vector(1,0,0), 0);
@@ -86,16 +80,11 @@ bool Scene::ray_tracing(const Vector* orig, const Vector dir,
     Vector albedo;
     double spectrum, lAlb, cAlb, rAlb;
 
-    if (type == 1)
-    {
-        if (depth > DEPTH_REFLECT ||
-                !scene_intersect(orig, dir, sphere, point, N, material))
-            return false;
-    }
-    else
-        if (depth > DEPTH_REFLECT ||
-                !plane_intersect(orig, dir, sphere, point, N, material))
-            return false;
+
+    if (depth > DEPTH_REFLECT ||
+            !scene_intersect(orig, dir, sphere, point, N, material))
+        return false;
+
     material.get_material(difCol, albedo, spectrum);
     albedo.get_vec(lAlb, cAlb, rAlb);
 
@@ -107,7 +96,6 @@ bool Scene::ray_tracing(const Vector* orig, const Vector dir,
                 point - N*1e-3 : point + N*1e-3;
     bool isObject = ray_tracing(&reflect_orig, reflect_dir,
                                    sphere, &reflect_color, lights, depth + 1);
-
 
     if (!isObject)
     {
@@ -171,6 +159,7 @@ void Scene::render()
     this->draw_background();
     this->draw_pendulum_thread();
 
+    // Плоскость
     #pragma omp parallel for num_threads(8) private(dir, color)
     for (int j = _height / 2; j < _height - 100; j++)
         for (int i = 2; i < _width - 2; i++)
@@ -191,6 +180,7 @@ void Scene::render()
     if (isTrajectory)
         this->draw_trajectory();
 
+    // Сфера
     double centerX, centerY, centerZ;
     sphere->get_center(centerX, centerY, centerZ);
     int j_end = yWorldCoords((centerY - 3*sphere->get_radius()) * -1/centerZ);
@@ -214,6 +204,14 @@ void Scene::render()
         }
 
     this->addPixmap(QPixmap::fromImage(*img));
+}
+
+void Scene::draw_pix(double x, double y, Color col)
+{
+    QRgb rgbCol = col.qrgbColor();
+    int intX = round(x);
+    int intY = round(y);
+    img->setPixel(intX, intY, rgbCol);
 }
 
 void Scene::draw_background()
@@ -273,100 +271,11 @@ void Scene::draw_trajectory()
         std::pair<double, double> cur = trajectory[i];
         std::pair<double, double> next = trajectory[i+1];
 
-//        if (cur.first <= (centerX + sphere->get_radius())-1/centerZ &&
-//                cur.first >= (centerX - sphere->get_radius())*-1/centerZ &&
-//                cur.second <= (centerY + 0*sphere->get_radius())-1/centerZ &&
-//                cur.second >= (centerY - 2*sphere->get_radius())*-1/centerZ)
-//            continue;
-
         painter.drawLine(xWorldCoords(cur.first), yWorldCoords(cur.second),
                          xWorldCoords(next.first), yWorldCoords(next.second));
     }
 
     painter.end();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-bool Scene::plane_intersect(const Vector* orig, const Vector dir,
-                            const Sphere* sphere, Vector &hit,
-                            Vector &N, Material &material)
-{
-    double checkerboard_dist = std::numeric_limits<double>::max();
-    double origX, origY, origZ; orig->get_vec(origX, origY, origZ);
-    double dirX, dirY, dirZ; dir.get_vec(dirX, dirY, dirZ);
-
-//    Color t1; Vector t2; double t3; Vector diffuse_color;
-//    sphere->get_material(t1, t2, t3);
-//    diffuse_color = t1;
-    material = *sphere->get_material();
-    Color diffuse_color = material.get_diffuse();
-    Vector albedo = material.get_albedo();
-    double spec = material.get_spec_exp();
-
-    if (fabs(dirY)>1e-5)
-    {
-        float d = -(origY+4)/dirY; // the checkerboard plane has equation y = -4
-        Vector pt = *orig + dir*d;
-        double ptX, ptY, ptZ; pt.get_vec(ptX, ptY, ptZ);
-        if (d > 0 && fabs(ptX) < 10 && ptZ < -10 && ptZ > -30)
-        {
-            checkerboard_dist = d;
-            hit = pt;
-            N = Vector(0,1,0);
-            //std::cout << ((int(.5*hitX+1000) + int(.5*hitZ)) & 1) << " ";
-            diffuse_color = (int(0.5*ptX+1000) + int(0.5*ptZ)) & 1 ?
-                        Color(0.4, 0.47, 0.2) : Color(0.3, 0.21, 0.9);
-                        //Color(0, 0, 0) : Color(1, 1, 1);
-            //diffuse_color = diffuse_color * 0.3;
-            material = Material(diffuse_color, albedo, spec);
-            //material = Material(diffuse_color, Vector(1,0,0), 0);
-        }
-    }
-    return checkerboard_dist < 1000;
-}
-
-
-
-
-
-
-
-
-
-
-
 
 } }

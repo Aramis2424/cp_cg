@@ -124,19 +124,6 @@ public:
     void draw_pendulum_thread();
     void add_trajectory();
     void draw_trajectory();
-
-
-
-
-
-
-
-
-
-
-    bool plane_intersect(const Vector* orig, const Vector dir,
-                                const Sphere* sphere, Vector &hit,
-                                Vector &N, Material &material);
 };
 
 } }
