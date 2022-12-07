@@ -32,6 +32,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->radio_north->setChecked(true);
     ui->isTrajectory->setChecked(false);
     ui->isAcceleration->setChecked(false);
+    ui->stop_btn->setEnabled(false);
+    ui->reset_btn->setEnabled(false);
 
     // Расположение маятника по умолчанию
     scene->set_place(90);
@@ -78,16 +80,20 @@ void MainWindow::on_start_btn_clicked() // TODO: заблокировать кн
     ui->radio_north->setEnabled(false);
     ui->radio_south->setEnabled(false);
     ui->radio_equator->setEnabled(false);
+    ui->start_btn->setEnabled(false);
+    ui->stop_btn->setEnabled(true);
+    ui->reset_btn->setEnabled(true);
 
     mode = on;
 
     scene->render();
 }
 
-
 void MainWindow::on_stop_btn_clicked()
 {
     mode = off;
+    ui->start_btn->setEnabled(true);
+    ui->stop_btn->setEnabled(false);
 }
 
 void MainWindow::on_reset_btn_clicked()
@@ -97,6 +103,9 @@ void MainWindow::on_reset_btn_clicked()
     ui->radio_north->setEnabled(true);
     ui->radio_south->setEnabled(true);
     ui->radio_equator->setEnabled(true);
+    ui->reset_btn->setEnabled(false);
+    ui->start_btn->setEnabled(true);
+    ui->stop_btn->setEnabled(false);
 
     mode = off;
 
