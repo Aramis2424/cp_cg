@@ -171,9 +171,6 @@ void Scene::render()
     this->draw_background();
     this->draw_pendulum_thread();
 
-    double centerX, centerY, centerZ;
-    sphere->get_center(centerX, centerY, centerZ);
-
     #pragma omp parallel for num_threads(8) private(dir, color)
     for (int j = _height / 2; j < _height - 100; j++)
         for (int i = 2; i < _width - 2; i++)
@@ -194,6 +191,8 @@ void Scene::render()
     if (isTrajectory)
         this->draw_trajectory();
 
+    double centerX, centerY, centerZ;
+    sphere->get_center(centerX, centerY, centerZ);
     int j_end = yWorldCoords((centerY - 3*sphere->get_radius()) * -1/centerZ);
     int j_start = yWorldCoords((centerY + 3*sphere->get_radius()) * -1/centerZ);
     int i_start = xWorldCoords((centerX - 3*sphere->get_radius()) * -1/centerZ);
