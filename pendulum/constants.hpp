@@ -16,17 +16,17 @@ const double omega = 7.292e-5;
 
 const int WIDTH = 950;
 const int HEIGHT = 934;
-const FP::color::Color  BACKGROUND_COLOR(0.2, 0.7, 0.8);
+const FP::color::Color  BACKGROUND_COLOR(0.3, 0.44, 0.63);
 
 // Sphere
 const double sx0 = 15;
 const double sy0 = 0;
 const double sz0 = -26;
 
-const int sr = 2;
+const double sr = 2.3;
 
-const FP::color::Color sdiffCol(0.4, 0.4, 0.3);
-const FP::vector::Vector salb(0.35, 0.3, 0.6);
+const FP::color::Color sdiffCol(0.51, 0.51, 0.51);
+const FP::vector::Vector salb(0.50, 0.30, 0.6);
 //lAlb - яркость
 //cAlb - блики
 //rAlb - отражательная сила
@@ -42,18 +42,18 @@ const double cz0 = 0;
 const double FOV = M_PI / 2.0;
 
 //Light _1_
-const double lx1 = 10;
-const double ly1 = 25;
-const double lz1 = -15;
+const double lx1 = 15;
+const double ly1 = 35;
+const double lz1 = -10;
 
 const double lintens1 = 1.5;
 
 //Light _2_
-const double lx2 = -10;
-const double ly2 = 25;
-const double lz2 = -15;
+const double lx2 = -15;
+const double ly2 = 35;
+const double lz2 = -10;
 
-const double lintens2 = 0.7;
+const double lintens2 = 0.9;
 
 enum state_t
 {

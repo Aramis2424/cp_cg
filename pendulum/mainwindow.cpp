@@ -57,10 +57,8 @@ void MainWindow::start_render()
         scene->render();
 }
 
-void MainWindow::on_start_btn_clicked() // TODO: заблокировать кнопку послу запуска
-{ // TODO: добавить кнопку reset, которая обнуляет все переменные и разблокирует
-  // кнопку старт
-
+void MainWindow::on_start_btn_clicked()
+{
     // Ускорение Земли
     if (ui->isAcceleration->isChecked())
         scene->set_acceleration(true);

@@ -52,7 +52,7 @@ bool Scene::scene_intersect(const Vector* orig, const Vector dir,
     Vector albedo = material.get_albedo();
     double spec = material.get_spec_exp();
 
-    if (fabs(dirY)>1e-3)
+    if (fabs(dirY)>1e-5)
     {
         float d = -(origY+4)/dirY; // the checkerboard plane has equation y = -4
         Vector pt = *orig + dir*d;
@@ -64,7 +64,8 @@ bool Scene::scene_intersect(const Vector* orig, const Vector dir,
             N = Vector(0,1,0);
             //std::cout << ((int(.5*hitX+1000) + int(.5*hitZ)) & 1) << " ";
             diffuse_color = (int(0.5*ptX+1000) + int(0.5*ptZ)) & 1 ?
-                        Color(0.3, 0.3, 0.3) : Color(0.3, 0.21, 0.9);
+                        Color(0.3, 0.5, 0.3) : Color(0.3, 0.21, 0.9);
+                        //Color(0, 0, 0) : Color(1, 1, 1);
             //diffuse_color = diffuse_color * 0.3;
             material = Material(diffuse_color, albedo, spec);
             //material = Material(diffuse_color, Vector(1,0,0), 0);
@@ -99,7 +100,10 @@ bool Scene::ray_tracing(const Vector* orig, const Vector dir,
     bool isObject = ray_tracing(&reflect_orig, reflect_dir,
                                    sphere, &reflect_color, lights, depth + 1);
     if (!isObject)
+    {
+        rAlb = 0.45;
         reflect_color = BACKGROUND_COLOR;
+    }
     //////////////////////////////////////////////--^
 
     double diffuse_light_intensity = 0, specular_light_intensity = 0;
@@ -192,7 +196,7 @@ void Scene::draw_pendulum_thread()
     double x = centerX * -1/centerZ;
     double y = (centerY - sphere->get_radius()) * -1/centerZ;
 
-    painter.drawLine(xWorldCoords(0), yWorldCoords(7),
+    painter.drawLine(xWorldCoords(0), yWorldCoords(8),
                      xWorldCoords(x), yWorldCoords(y));
 
     painter.end();

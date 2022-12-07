@@ -15,7 +15,7 @@ using namespace FP::material;
 class Sphere
 {
 private:
-    int radius;
+    double radius;
     Material* material;
     Vector* center;
     struct
@@ -61,7 +61,7 @@ public:
         center = new Vector();
         material = new Material(Color(0, 0, 0), Vector(), 1.5);
     }
-    Sphere(int r, double x, double y, double z, Color diffCol,
+    Sphere(double r, double x, double y, double z, Color diffCol,
            Vector alb, double s_e)
     {
         radius = r;
