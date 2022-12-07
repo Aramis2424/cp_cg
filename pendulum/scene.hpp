@@ -34,7 +34,7 @@ private:
 
     long double time_simulation;
     std::vector<std::pair<double, double>> trajectory;
-    bool isTrajectory;
+    bool isTrajectory = false;
 
 private:
     double xSceneCoords(int x)
@@ -104,13 +104,25 @@ public:
     void set_place(int latitude)
     { sphere->set_place(latitude); }
     void set_acceleration(bool a)
-    {  sphere->set_acceleration(a); }
+    { sphere->set_acceleration(a); }
     void set_trajectory(bool a)
     {  isTrajectory = a; }
+
+    void reset_scene()
+    {
+        if (trajectory.size() > 1) // Сброс траектории
+            trajectory.clear();
+
+        time_simulation = 0; // Сброс времени выполнения
+
+        delete sphere; // Создание новой сферы
+        sphere = new Sphere(sr, sx0, sy0, sz0, sdiffCol, salb, sspec_exp);
+    }
 
     void render();
     void draw_background();
     void draw_pendulum_thread();
+    void add_trajectory();
     void draw_trajectory();
 };
 

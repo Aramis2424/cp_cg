@@ -166,8 +166,9 @@ void Scene::render()
             draw_pix(i, j, color);
         }
 
-    //if (isTrajectory)
-    this->draw_trajectory();
+    this->add_trajectory();
+    if (isTrajectory)
+        this->draw_trajectory();
     this->addPixmap(QPixmap::fromImage(*img));
 }
 
@@ -193,15 +194,12 @@ void Scene::draw_pendulum_thread()
 
     painter.drawLine(xWorldCoords(0), yWorldCoords(7),
                      xWorldCoords(x), yWorldCoords(y));
+
+    painter.end();
 }
 
-void Scene::draw_trajectory()
+void Scene::add_trajectory()
 {
-    QPainter painter;
-    painter.begin(img);
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-
     double centerX, centerY, centerZ;
     sphere->get_center(centerX, centerY, centerZ);
     double x = centerX * -1/centerZ;
@@ -217,6 +215,14 @@ void Scene::draw_trajectory()
             trajectory.clear();
             return;
         }
+}
+
+void Scene::draw_trajectory()
+{
+    QPainter painter;
+    painter.begin(img);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
     for (unsigned long long i = 0; i < trajectory.size() - 1; i++)
     {
@@ -232,6 +238,8 @@ void Scene::draw_trajectory()
         painter.drawLine(xWorldCoords(cur.first), yWorldCoords(cur.second),
                          xWorldCoords(next.first), yWorldCoords(next.second));
     }
+
+    painter.end();
 }
 
 } }

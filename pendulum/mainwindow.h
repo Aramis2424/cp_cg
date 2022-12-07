@@ -28,6 +28,10 @@ private slots:
 
     void start_render();
 
+    void on_isTrajectory_clicked();
+
+    void on_reset_btn_clicked();
+
 private:
     FP::scene::Scene *scene;
     QGraphicsLineItem *line;

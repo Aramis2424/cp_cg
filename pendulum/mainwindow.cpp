@@ -28,7 +28,14 @@ MainWindow::MainWindow(QWidget *parent)
                                      QPainter::SmoothPixmapTransform);
     scene->setSceneRect(0, 0, 1, 1);
 
+    // Настройки для checkBox
     ui->radio_north->setChecked(true);
+    ui->isTrajectory->setChecked(false);
+    ui->isAcceleration->setChecked(false);
+
+    // Расположение маятника по умолчанию
+    scene->set_place(90);
+    scene->render();
 
     //Time and FPS
     timer = new QTimer(this);
@@ -50,15 +57,9 @@ void MainWindow::start_render()
 
 void MainWindow::on_start_btn_clicked() // TODO: заблокировать кнопку послу запуска
 { // TODO: добавить кнопку reset, которая обнуляет все переменные и разблокирует
-        // кнопку старт
+  // кнопку старт
 
-    // Траектория
-    if (ui->isTrajectory->isChecked())
-        scene->set_acceleration(true);
-    else
-        scene->set_acceleration(false);
-
-    // Скорость Земли
+    // Ускорение Земли
     if (ui->isAcceleration->isChecked())
         scene->set_acceleration(true);
     else
@@ -72,19 +73,15 @@ void MainWindow::on_start_btn_clicked() // TODO: заблокировать кн
     else if (ui->radio_equator->isChecked())
         scene->set_place(0);
 
+    // Блокировка элементов
+    ui->isAcceleration->setEnabled(false);
+    ui->radio_north->setEnabled(false);
+    ui->radio_south->setEnabled(false);
+    ui->radio_equator->setEnabled(false);
+
     mode = on;
 
     scene->render();
-
-
-//    FP::color::Color color;
-//    color.set(255, 40, 60);
-//    QPen line_color(color);
-//    scene->draw_pix(0, 0, color);
-//    std::cout << width() << std::endl;
-//    std::cout << height() << std::endl;
-//    line = scene->addLine(0, 0, 510, 510, line_color);
-
 }
 
 
@@ -93,3 +90,28 @@ void MainWindow::on_stop_btn_clicked()
     mode = off;
 }
 
+void MainWindow::on_reset_btn_clicked()
+{
+    // Разблокировка элементов
+    ui->isAcceleration->setEnabled(true);
+    ui->radio_north->setEnabled(true);
+    ui->radio_south->setEnabled(true);
+    ui->radio_equator->setEnabled(true);
+
+    mode = off;
+
+    scene->reset_scene();
+
+    // Расположение маятника по умолчанию
+    scene->set_place(90);
+    scene->render();
+}
+
+void MainWindow::on_isTrajectory_clicked()
+{
+    // Траектория
+    if (ui->isTrajectory->isChecked())
+        scene->set_trajectory(true);
+    else
+        scene->set_trajectory(false);
+}

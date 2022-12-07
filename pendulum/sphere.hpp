@@ -30,9 +30,9 @@ private:
         double _omega_;
         double omega_minus;
         double omega_plus;
-        double phi;
+        double phi = 90; // Северный полюс по умолчанию
     }place;
-    bool acceleration;
+    bool acceleration = false;
 private:
     double xt(long long t, double x0)
     {

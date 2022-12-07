@@ -18,7 +18,7 @@ const int HEIGHT = 934;
 const FP::color::Color  BACKGROUND_COLOR(0.2, 0.7, 0.8);
 
 // Sphere
-const double sx0 = 0;
+const double sx0 = 15;
 const double sy0 = 0;
 const double sz0 = -26;
 

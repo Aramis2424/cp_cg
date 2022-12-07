@@ -191,7 +191,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Запустить маятник</string>
+           <string>Запуск</string>
           </property>
          </widget>
         </item>
@@ -215,12 +215,12 @@
            </font>
           </property>
           <property name="text">
-           <string>Остановить маятник</string>
+           <string>Пауза</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="stop_btn_2">
+         <widget class="QPushButton" name="reset_btn">
           <property name="minimumSize">
            <size>
             <width>187</width>
@@ -239,7 +239,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Сбросить</string>
+           <string>Остановить</string>
           </property>
          </widget>
         </item>
