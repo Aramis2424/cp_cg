@@ -23,7 +23,5 @@ int main(int argc, char *argv[]) {
 
 
     <>=-<>=-:; Extra_material ;:-=<>-=<>
-Sphere sphere(10, _width/2, _height/2, 0); // так было изначально
-ui->graphicsView->setAlignment(Qt::AlignCenter); //Начало координат в центре холста
 
 */
