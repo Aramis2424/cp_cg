@@ -44,14 +44,14 @@ const double FOV = M_PI / 2.0;
 //Light _1_
 const double lx1 = 10;
 const double ly1 = 25;
-const double lz1 = -5;
+const double lz1 = -15;
 
 const double lintens1 = 1.5;
 
 //Light _2_
 const double lx2 = -10;
 const double ly2 = 25;
-const double lz2 = -5;
+const double lz2 = -15;
 
 const double lintens2 = 0.7;
 
