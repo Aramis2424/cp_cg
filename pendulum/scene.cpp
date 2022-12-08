@@ -243,6 +243,9 @@ void Scene::draw_trajectory()
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
+    if (trajectory.size() == 0)
+        return;
+
     for (unsigned long long i = 0; i < trajectory.size() - 1; i++)
     {
         std::pair<double, double> cur = trajectory[i];
