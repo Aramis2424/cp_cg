@@ -15,7 +15,6 @@ bool Scene::scene_intersect(const Vector* orig, const Vector dir,
                             Vector &N, Material &material)
 {
     double spheres_dist = std::numeric_limits<double>::max();
-
     double dist_i;
     if (sphere->ray_intersect(*orig, dir, dist_i) && dist_i < spheres_dist)
     {
@@ -31,15 +30,10 @@ bool Scene::scene_intersect(const Vector* orig, const Vector dir,
         material = *sphere->get_material();
     }
 
-    //return spheres_dist < 1000;
-
     double checkerboard_dist = std::numeric_limits<double>::max();
     double origX, origY, origZ; orig->get_vec(origX, origY, origZ);
     double dirX, dirY, dirZ; dir.get_vec(dirX, dirY, dirZ);
 
-//    Color t1; Vector t2; double t3; Vector diffuse_color;
-//    sphere->get_material(t1, t2, t3);
-//    diffuse_color = t1;
     material = *sphere->get_material();
     Color diffuse_color = material.get_diffuse();
     Vector albedo = material.get_albedo();
@@ -47,7 +41,7 @@ bool Scene::scene_intersect(const Vector* orig, const Vector dir,
 
     if (fabs(dirY)>1e-5)
     {
-        float d = -(origY+4)/dirY; // the checkerboard plane has equation y = -4
+        float d = -(origY+4)/dirY; // координата y плоскости: y = -4
         Vector pt = *orig + dir*d;
         double ptX, ptY, ptZ; pt.get_vec(ptX, ptY, ptZ);
         if (d > 0 && fabs(ptX) < 10 && ptZ < -10 && ptZ > -30 && d < spheres_dist)
@@ -55,14 +49,11 @@ bool Scene::scene_intersect(const Vector* orig, const Vector dir,
             checkerboard_dist = d;
             hit = pt;
             N = Vector(0,1,0);
-            //std::cout << ((int(.5*hitX+1000) + int(.5*hitZ)) & 1) << " ";
             diffuse_color = (int(0.5*ptX+1000) + int(0.5*ptZ)) & 1 ?
                         Color(0.3, 0.3, 0.3) : Color(0.3, 0.21, 0.9);
                         //Color(0.4, 0.47, 0.2) : Color(0.3, 0.21, 0.9);  // зел
                         //Color(0, 0, 0) : Color(1, 1, 1);  //   ч\б
-            //diffuse_color = diffuse_color * 0.3;
             material = Material(diffuse_color, albedo, spec);
-            //material = Material(diffuse_color, Vector(1,0,0), 0);
         }
     }
     return std::min(spheres_dist, checkerboard_dist)<1000;
@@ -80,7 +71,6 @@ bool Scene::ray_tracing(const Vector* orig, const Vector dir,
     Vector albedo;
     double spectrum, lAlb, cAlb, rAlb;
 
-
     if (depth > DEPTH_REFLECT ||
             !scene_intersect(orig, dir, sphere, point, N, material))
         return false;
@@ -88,31 +78,27 @@ bool Scene::ray_tracing(const Vector* orig, const Vector dir,
     material.get_material(difCol, albedo, spectrum);
     albedo.get_vec(lAlb, cAlb, rAlb);
 
-    /////////////////////////////////////////////--v
     Vector reflect_dir = sceneReflect(dir, N).normalize();
     Color reflect_color;
-    // offset the original point to avoid occlusion by the object itself
+    // небольшой сдвиг для корректной работы
     Vector reflect_orig = reflect_dir.scalar(N) < 0 ?
                 point - N*1e-3 : point + N*1e-3;
     bool isObject = ray_tracing(&reflect_orig, reflect_dir,
                                    sphere, &reflect_color, lights, depth + 1);
-
     if (!isObject)
     {
         rAlb = 0.45;
         reflect_color = BACKGROUND_COLOR;
     }
-    //////////////////////////////////////////////--^
 
     double diffuse_light_intensity = 0, specular_light_intensity = 0;
     for (size_t i = 0; i < lights.size(); i++)
     {
         Vector light_dir = (lights[i] - point).normalize();
 
-        ////////////////////////////////////--v
-        // shadow
+        // Тень
         float light_distance = (lights[i] - point).len();
-        // checking if the point lies in the shadow of the lights[i]
+        // если точка лежит в тени источника lights[i]
         Vector shadow_orig = light_dir.scalar(N) < 0 ?
                     point - N * 1e-3 : point + N * 1e-3;
         Vector shadow_pt, shadow_N;
@@ -121,7 +107,6 @@ bool Scene::ray_tracing(const Vector* orig, const Vector dir,
                             shadow_pt, shadow_N, tmpmaterial) &&
                 (shadow_pt-shadow_orig).len() < light_distance)
             continue;
-        ////////////////////////////////////--^
 
         diffuse_light_intensity  += (lights[i].get_intensity() *
                 std::max(0.01, light_dir.scalar(N)));
