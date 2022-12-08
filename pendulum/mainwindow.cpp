@@ -65,9 +65,12 @@ void MainWindow::on_start_btn_clicked()
 
     // Блокировка элементов
     ui->isAcceleration->setEnabled(false);
-    ui->radio_north->setEnabled(false);
-    ui->radio_south->setEnabled(false);
-    ui->radio_equator->setEnabled(false);
+    if (!ui->radio_north->isChecked())
+        ui->radio_north->setEnabled(false);
+    if (!ui->radio_south->isChecked())
+        ui->radio_south->setEnabled(false);
+    if (!ui->radio_equator->isChecked())
+        ui->radio_equator->setEnabled(false);
     ui->start_btn->setEnabled(false);
     ui->stop_btn->setEnabled(true);
     ui->reset_btn->setEnabled(true);

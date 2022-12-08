@@ -34,6 +34,9 @@
   <property name="windowTitle">
    <string>Маятник Фуко</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(92, 105, 141);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="enabled">
     <bool>true</bool>
@@ -81,6 +84,9 @@
            <font>
             <pointsize>14</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
           </property>
           <property name="text">
            <string>Северный полюс</string>
@@ -205,6 +211,30 @@
             <pointsize>14</pointsize>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    color: #333;
+    border-radius: 20px;
+    border-style: outset;
+    padding: 5px;
+	background-color: rgb(85, 170, 255);
+    }
+
+QPushButton:hover {
+    background-color: rgb(85, 190, 255);
+    }
+
+QPushButton:pressed {
+    border-style: inset;
+    background-color: rgb(85, 190, 255);
+    }
+
+QPushButton:disabled {
+	color: #777;
+    border-style: inset;
+    background-color: rgb(38, 75, 113);
+    }</string>
+          </property>
           <property name="text">
            <string>Запуск</string>
           </property>
@@ -229,6 +259,30 @@
             <pointsize>14</pointsize>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    color: #333;
+    border-radius: 20px;
+    border-style: outset;
+    padding: 5px;
+	background-color: rgb(85, 170, 255);
+    }
+
+QPushButton:hover {
+    background-color: rgb(85, 190, 255);
+    }
+
+QPushButton:pressed {
+    border-style: inset;
+    background-color: rgb(85, 190, 255);
+    }
+
+QPushButton:disabled {
+	color: #777;
+    border-style: inset;
+    background-color: rgb(38, 75, 113);
+    }</string>
+          </property>
           <property name="text">
            <string>Пауза</string>
           </property>
@@ -252,6 +306,30 @@
            <font>
             <pointsize>14</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    color: #333;
+    border-radius: 20px;
+    border-style: outset;
+    padding: 5px;
+	background-color: rgb(85, 170, 255);
+    }
+
+QPushButton:hover {
+    background-color: rgb(85, 190, 255);
+    }
+
+QPushButton:pressed {
+    border-style: inset;
+    background-color: rgb(85, 190, 255);
+    }
+
+QPushButton:disabled {
+	color: #777;
+    border-style: inset;
+    background-color: rgb(38, 75, 113);
+    }</string>
           </property>
           <property name="text">
            <string>Остановить</string>
@@ -281,6 +359,10 @@
         <width>710</width>
         <height>710</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid #555;
+border-color: rgb(85, 0, 255);</string>
       </property>
      </widget>
     </item>
