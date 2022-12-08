@@ -1,11 +1,10 @@
 #ifndef SPHERE_HPP
 #define SPHERE_HPP
 
-#include <QMainWindow>
-#include <iostream>
-#include "vector.hpp"
-#include "material.hpp"
 #include <QTimer>
+
+#include "material.hpp"
+#include "constants.hpp"
 
 namespace FP { namespace sphere {
 using namespace FP::vector;

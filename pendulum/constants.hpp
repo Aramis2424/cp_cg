@@ -3,7 +3,6 @@
 
 #include <cmath>
 
-#include "material.hpp"
 #include "color.hpp"
 
 // Earth

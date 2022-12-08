@@ -1,7 +1,6 @@
 #ifndef MATERIAL_HPP
 #define MATERIAL_HPP
 
-#include "vector.hpp"
 #include "color.hpp"
 
 namespace FP { namespace material {

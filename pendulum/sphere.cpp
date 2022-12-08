@@ -1,5 +1,4 @@
 #include "sphere.hpp"
-#include "constants.hpp"
 
 namespace FP { namespace sphere {
 

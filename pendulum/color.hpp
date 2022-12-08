@@ -2,7 +2,6 @@
 #define COLOR_HPP
 
 #include <QColor>
-#include <iostream>
 
 #include "vector.hpp"
 

@@ -2,14 +2,12 @@
 #define SCENE_HPP
 
 #include <QGraphicsScene>
-#include <QImage>
-#include <vector>
+#include <QPainter>
+
 #include "color.hpp"
-#include "vector.hpp"
 #include "sphere.hpp"
 #include "camera.hpp"
 #include "light.hpp"
-#include "constants.hpp"
 
 namespace FP { namespace scene {
 using namespace FP::color;

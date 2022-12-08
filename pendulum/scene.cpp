@@ -1,12 +1,4 @@
-#include <iostream>
-#include <QPainter>
-
 #include "scene.hpp"
-#include "sphere.hpp"
-#include "camera.hpp"
-#include "material.hpp"
-#include "vector.hpp"
-
 
 namespace FP { namespace scene {
 

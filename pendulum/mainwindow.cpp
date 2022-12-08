@@ -1,15 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "scene.hpp"
-#include "constants.hpp"
-#include "sphere.hpp"
-
-#include "color.hpp"
-
-#include "vector.hpp"
-#include <iostream>
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)

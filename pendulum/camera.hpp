@@ -1,7 +1,6 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "vector.hpp"
 #include "constants.hpp"
 
 namespace FP { namespace camera {

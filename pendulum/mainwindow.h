@@ -2,12 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QGraphicsScene>
-#include <QGraphicsView>
 #include <QGraphicsItem>
 
 #include "scene.hpp"
-#include "sphere.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
