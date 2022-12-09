@@ -131,7 +131,7 @@ void Scene::render()
     Vector dir;
     Color color = BACKGROUND_COLOR;
     sphere->moving(time_simulation);
-    time_simulation += 0.2;
+    time_simulation += 0.15;
 
     this->draw_background();
     this->draw_pendulum_thread();
