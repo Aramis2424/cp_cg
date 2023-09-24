@@ -16,8 +16,8 @@ x0 = width / 2
 y0 = height /2
 vx = width / 2
 vy = height /2
-a = 50
-b = 50
+a = 9 # 50
+b = 8 # 50
 t = 0
 
 phi = 90
@@ -67,15 +67,21 @@ while running:
         continue
     dt = clock.tick(24) / 1000.0
 #============================================================================
-
+# Спираль
 ##    x = a * sin(t) + vx
 ##    y = b * cos(t) + vy
 ##    a += 0.1
 ##    b += 0.1
-    x = x_new_1(t, vx) + vx
-    y = y_new_1(t, vy) + vy
 
-    t += 0.1
+# Фуко
+##    x = x_new_1(t, vx) + vx
+##    y = y_new_1(t, vy) + vy
+
+# Лиссажу
+    x = a * 14 * sin(a * t) + vx
+    y = b * 13 * sin(b * t) + vy
+
+    t += 0.005
     t %= 5000
     if t == 0:
         pixels = []
