@@ -7,4 +7,4 @@
 
 Сцена состоит из маятника, плоскости и двух источников света.
 
-![](D:\BMSTU\BMSTU_sem7\cp_cg\pictures\pic1.png)
+![Маятник Фуко](./pictures/pic1.png)
